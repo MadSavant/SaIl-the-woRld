@@ -1,0 +1,1 @@
+Si tu peux lire ça c'est qu'on peut commiter à plusieurs ce qui est une bonne nouvelle
