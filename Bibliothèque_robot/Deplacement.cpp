@@ -55,12 +55,60 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 //***************************************************
 // Get - Set Mode
 //***************************************************
-void Deplacement::setMode(const Mode mode)
+void Deplacement::setMode(const uint8_t mode)
 {
 	_mode = mode;
+	
+	switch(_mode)
+	{
+		case MODE_1_SUR_1:
+			_m0 = GPIO_PIN_RESET;
+			_m1 = GPIO_PIN_RESET;
+			_m2 = GPIO_PIN_RESET;
+			break;
+			
+		case MODE_1_SUR_2:
+			_m0 = GPIO_PIN_RESET;
+			_m1 = GPIO_PIN_RESET;
+			_m2 = GPIO_PIN_SET;
+			break;
+			
+		case MODE_1_SUR_4:
+			_m0 = GPIO_PIN_RESET;
+			_m1 = GPIO_PIN_SET;
+			_m2 = GPIO_PIN_RESET;
+			break;
+			
+		case MODE_1_SUR_8:
+			_m0 = GPIO_PIN_RESET;
+			_m1 = GPIO_PIN_SET;
+			_m2 = GPIO_PIN_SET;
+			break;
+			
+		case MODE_1_SUR_16:
+			_m0 = GPIO_PIN_SET;
+			_m1 = GPIO_PIN_RESET;
+			_m2 = GPIO_PIN_RESET;
+			break;
+			
+		case MODE_1_SUR_32:
+			_m0 = GPIO_PIN_SET;
+			_m1 = GPIO_PIN_SET;
+			_m2 = GPIO_PIN_SET;
+			break;
+			
+		default :
+			_m0 = GPIO_PIN_RESET;
+			_m1 = GPIO_PIN_RESET;
+			_m2 = GPIO_PIN_RESET;
+	}
+	
+	HAL_GPIO_WritePin(GPIOA, _pinMode0, _m0);		//GPIOA en attendant
+	HAL_GPIO_WritePin(GPIOA, _pinMode1, _m1);
+	HAL_GPIO_WritePin(GPIOA, _pinMode2, _m2);
 }
 
-Mode Deplacement::getMode()
+uint8_t Deplacement::getMode()
 {
 	return _mode;
 }
@@ -76,9 +124,9 @@ void Deplacement::setPinLE(const uint16_t pinDir, const uint16_t pinStep)
 
 uint16_t* Deplacement::getPinLE()
 {
-	uint16_t ret[2];
+	static uint16_t ret[2];
 	
-	ret = (uint16_t*)malloc(sizeOf(uint16_t)*2);
+	//ret = (uint16_t*)malloc(sizeOf(uint16_t)*2);
 	ret[0] = _pinDirLE;
 	ret[1] = _pinStepLE;
 	
@@ -96,9 +144,9 @@ void Deplacement::setPinRE(const uint16_t pinDir, const uint16_t pinStep)
 
 uint16_t* Deplacement::getPinRE()
 {
-	uint16_t ret[2];
+	static uint16_t ret[2];
 	
-	ret = (uint16_t*)malloc(sizeOf(uint16_t)*2);
+	//ret = (uint16_t*)malloc(sizeOf(uint16_t)*2);
 	ret[0] = _pinDirRE;
 	ret[1] = _pinStepRE;
 	
@@ -108,12 +156,12 @@ uint16_t* Deplacement::getPinRE()
 //***************************************************
 // Get - Set speed
 //***************************************************
-void Deplacement::setSpeed(const uint8_t speed)
+void Deplacement::setSpeed(const uint16_t speed)
 {
 	_speed = speed;
 }
 
-uint8_t Deplacement::getSpeed()
+uint16_t Deplacement::getSpeed()
 {
 	return speed;
 }
@@ -121,13 +169,13 @@ uint8_t Deplacement::getSpeed()
 //***************************************************
 // Get - Set cote
 //***************************************************
-void Deplacement::setCote(const uint8_t cote)
+void Deplacement::setCote(const uint16_t cote)
 {
 	if(cote == COTE_GAUCHE || cote == COTE_DROIT)
 		_cote = cote;
 }
 
-uint8_t Deplacement::getCote()
+uint16_t Deplacement::getCote()
 {
 	return _cote;
 }
@@ -143,6 +191,65 @@ void Deplacement::setCoordonneesActuelles(const Coordonnees coord)
 Coordonnees Deplacement::getCoordonneesActuelles()
 {
 	return _coordActuel;
+}
+
+//***************************************************
+// Get - Set coordActuel
+//***************************************************
+void Deplacement::setAccel(const uint16_t accel)
+{
+	_accel = accel;
+}
+
+uint16_t Deplacement::getAccel()
+{
+	return _accel;
+}
+
+//***************************************************
+// Get - Set coordActuel
+//***************************************************
+void Deplacement::setRayonRoue(const uint16_t rayon)
+{
+	_rayonRoue = rayon;
+}
+
+uint16_t Deplacement::getRayonRoue()
+{
+	return _rayonRoue;
+}
+
+//***************************************************
+// Get - Set pin Mode
+//***************************************************
+void setPinM0(const uint16_t pin)
+{
+	_pinMode0 = pin;
+}
+
+uint16_t getPinM0()
+{
+	return _pinMode0;
+}
+
+void setPinM1(const uint16_t pin)
+{
+	_pinMode1 = pin;
+}
+
+uint16_t getPinM1()
+{
+	return _pinMode1;
+}
+
+void setPinM2(const uint16_t pin)
+{
+	_pinMode2 = pin;
+}
+
+uint16_t getPinM2()
+{
+	return _pinMode2;
 }
 //}
 
@@ -161,7 +268,7 @@ Coordonnees Deplacement::getCoordonneesActuelles()
 //					dépassement
 //
 // in :				void
-// out :			uint8_t	DEPASSEMENT_STATE
+// out :			uint16_t	DEPASSEMENT_STATE
 //
 //***************************************************
 void Deplacement::goStraight(const int8_t sens, const uint16_t distance)
@@ -176,10 +283,10 @@ void Deplacement::goStraight(const int8_t sens, const uint16_t distance)
 // Description : 	effectue un virage
 //
 // in :				void
-// out :			uint8_t	DEPASSEMENT_STATE
+// out :			uint16_t	DEPASSEMENT_STATE
 //
 //***************************************************
-void Deplacement::turn(const uint8_t lateralite, const uint16_t angle, const uint16_t radius)
+void Deplacement::turn(const uint16_t lateralite, const uint16_t angle, const uint16_t radius)
 {
 	
 }
@@ -204,6 +311,56 @@ void Deplacement::turn(const uint8_t lateralite, const uint16_t angle, const uin
 //
 //***************************************************
 void Deplacement::goToStraight(const Coordonnees *coord)
+{
+	
+}
+
+//}
+
+/* ================================================================================== *\		//En construction
+   ======================                                      ======================
+   ======================          FONCTIONS CALCULS           ======================
+   ======================                                      ======================
+\* ================================================================================== */
+
+//{
+//***************************************************
+//
+// Fonction : 		curveAccel
+//
+// Description : 	calcul la vitesse instantannée 
+//
+// in :				uint16_t distance
+// out :			void
+//
+//***************************************************
+void Deplacement::curveAccel(const uint16_t distance)
+{
+	if(speed * speed > _accel * distance)	//cas où le robot n'a pas le temps d'atteindre la vitesse max
+	{
+		float tm = sqrt(distance / _accel); //Temps milieu
+		
+	}
+	
+	else
+	{
+		float tm = speed/_accel;	//temps montée et descente
+		float tc = ditance / speed - speed / _accel; //temps vitesse constante
+		
+	}
+}
+
+//***************************************************
+//
+// Fonction : 		onePulse
+//
+// Description : 	calcul la vitesse instantannée 
+//
+// in :				uint16_t vitesseInstant
+// out :			void
+//
+//***************************************************
+void Deplacement::onePulse(const uint16_t vitesseInstant)
 {
 	
 }
