@@ -12,7 +12,11 @@
 //***************************************************
 Deplacement::Deplacement()
 {
-	
+	_speed 			=	128;
+	_pinDirLE		=	4;
+	_pinDirRE		=	5;
+	_pinStepLE		=	6;
+	_pinStepRE		=	7;
 }
 
 //***************************************************
@@ -20,7 +24,11 @@ Deplacement::Deplacement()
 //***************************************************
 Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, const uint16_t pinDirRE, const uint16_t pinStepRE)
 {
-	
+	_speed 			=	128;
+	_pinDirLE		=	pinDirLE;
+	_pinDirRE		=	pinDirRE;
+	_pinStepLE		=	pinStepLE;
+	_pinStepRE		=	pinStepRE;
 }
 
 //***************************************************
@@ -28,7 +36,12 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 //***************************************************
 Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, const uint16_t pinDirRE, const uint16_t pinStepRE, const uint16_t speed, const Mode mode)
 {
-	
+	_speed 			=	speed;
+	_mode			=	mode;
+	_pinDirLE		=	pinDirLE;
+	_pinDirRE		=	pinDirRE;
+	_pinStepLE		=	pinStepLE;
+	_pinStepRE		=	pinStepRE;
 }
 //}
 
@@ -42,66 +55,94 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 //***************************************************
 // Get - Set Mode
 //***************************************************
-Deplacement::void setMode(const Mode mode)
+void Deplacement::setMode(const Mode mode)
 {
-	
+	_mode = mode;
 }
 
-Deplacement::Mode getMode()
+Mode Deplacement::getMode()
 {
-	
+	return _mode;
 }
 
 //***************************************************
-// Get - Set pin left engine 
+// Get - Set pin left engine (DIR - STEP)
 //***************************************************
-Deplacement::void setPinLE(const uint16_t pinDir, const uint16_t pinStep)
+void Deplacement::setPinLE(const uint16_t pinDir, const uint16_t pinStep)
 {
-	
+	_pinDirLE 	= pinDir;
+	_pinStepLE 	= pinStep;
 }
 
-Deplacement::uint16_t* getPinLE()
+uint16_t* Deplacement::getPinLE()
 {
+	uint16_t ret[2];
 	
+	ret = (uint16_t*)malloc(sizeOf(uint16_t)*2);
+	ret[0] = _pinDirLE;
+	ret[1] = _pinStepLE;
+	
+	return ret;
 } //penser à l'alloc dynamique
 
 //***************************************************
-// Get - Set pin right engine 
+// Get - Set pin right engine (DIR - STEP)
 //***************************************************
-Deplacement::void setPinRE(const uint16_t pinDir, const uint16_t pinStep)
+void Deplacement::setPinRE(const uint16_t pinDir, const uint16_t pinStep)
 {
-	
+	_pinDirRE 	= pinDir;
+	_pinStepRE 	= pinStep;
 }
 
-Deplacement::uint16_t* getPinRE()
+uint16_t* Deplacement::getPinRE()
 {
+	uint16_t ret[2];
 	
+	ret = (uint16_t*)malloc(sizeOf(uint16_t)*2);
+	ret[0] = _pinDirRE;
+	ret[1] = _pinStepRE;
+	
+	return ret;
 } //penser à l'alloc dynamique
 
 //***************************************************
 // Get - Set speed
 //***************************************************
-Deplacement::void setSpeed(const uint8_t speed)
+void Deplacement::setSpeed(const uint8_t speed)
 {
-	
+	_speed = speed;
 }
 
-Deplacement::uint8_t getSpeed()
+uint8_t Deplacement::getSpeed()
 {
-	
+	return speed;
 }
 
 //***************************************************
 // Get - Set cote
 //***************************************************
-Deplacement::void setCote(const uint8_t cote)
+void Deplacement::setCote(const uint8_t cote)
 {
-	
+	if(cote == COTE_GAUCHE || cote == COTE_DROIT)
+		_cote = cote;
 }
 
-Deplacement::uint8_t getCote()
+uint8_t Deplacement::getCote()
 {
-	
+	return _cote;
+}
+
+//***************************************************
+// Get - Set coordActuel
+//***************************************************
+void Deplacement::setCoordonneesActuelles(const Coordonnees coord)
+{
+	_coordActuel = coord;
+}
+
+Coordonnees Deplacement::getCoordonneesActuelles()
+{
+	return _coordActuel;
 }
 //}
 
@@ -123,7 +164,7 @@ Deplacement::uint8_t getCote()
 // out :			uint8_t	DEPASSEMENT_STATE
 //
 //***************************************************
-Deplacement::void goStraight(const int8_t sens, const uint16_t distance)
+void Deplacement::goStraight(const int8_t sens, const uint16_t distance)
 {
 	
 }
@@ -138,7 +179,7 @@ Deplacement::void goStraight(const int8_t sens, const uint16_t distance)
 // out :			uint8_t	DEPASSEMENT_STATE
 //
 //***************************************************
-Deplacement::void turn(const uint8_t lateralite, const uint16_t angle, const uint16_t radius)
+void Deplacement::turn(const uint8_t lateralite, const uint16_t angle, const uint16_t radius)
 {
 	
 }
@@ -162,7 +203,7 @@ Deplacement::void turn(const uint8_t lateralite, const uint16_t angle, const uin
 // out :			void
 //
 //***************************************************
-Deplacement::void goToStraight(const Coordonnees *coord)
+void Deplacement::goToStraight(const Coordonnees *coord)
 {
 	
 }

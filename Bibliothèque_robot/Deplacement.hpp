@@ -13,6 +13,9 @@ Autheur 	: Gaëtan ROBERT
 
 #include "Coordonnees.hpp"
 
+#define COTE_DROIT	0
+#define COTE_GAUCHE	1
+
 enum Mode
 {
 	MODE_1_SUR_1,
@@ -33,7 +36,7 @@ class Deplacement
 		uint16_t 		_pinDirRE;
 		uint16_t 		_pinStepLE;
 		uint16_t 		_pinStepRE;
-		uint16_t 		_cote;
+		uint16_t 		_cote = COTE_GAUCHE;
 		
 	public :
 		//Constructeurs
@@ -52,6 +55,8 @@ class Deplacement
 		uint8_t getSpeed();
 		void setCote(const uint8_t cote);
 		uint8_t getCote();
+		void setCoordonneesActuelles(const Coordonnees coord);
+		Coordonnees getCoordonneesActuelles();
 		
 		//Fonctions de base
 		void goStraight(const int8_t sens, const uint16_t distance);

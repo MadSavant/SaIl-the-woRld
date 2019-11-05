@@ -202,10 +202,16 @@ Coordonnees Coordonnees::operator-(Coordonnees const& a, Coordonnees const& b)
 //***************************************************
 // Opérateur =
 //***************************************************
-Coordonnees& operator=(Coordonnees const& b)
+Coordonnees& Coordonnees::operator=(Coordonnees const& b)
 {
 	if(this != &b)
-		return *this;
+	{
+		_x  	=	b._x;
+		_y		=	b._y;
+		
+		_angle	=	b._angle;
+	}
+	return *this;
 }
 
 //}
