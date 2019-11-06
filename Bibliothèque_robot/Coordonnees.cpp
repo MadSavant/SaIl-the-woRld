@@ -170,7 +170,7 @@ Coordonnees& Coordonnees::operator-=(Coordonnees const& b)
 //***************************************************
 // Opérateur +
 //***************************************************
-Coordonnees operator+(Coordonnees const& a, Coordonnees const& b)
+Coordonnees operator+(Coordonnees const& a, Coordonnees const& b) //Pas de Deplamcenet:: car friend function
 {
 	Coordonnees result(a);
 	result += b;

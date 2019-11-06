@@ -1,0 +1,52 @@
+Coordonnees.cpp:15:1:Coordonnees::Coordonnees()	16	static
+Coordonnees.cpp:26:1:Coordonnees::Coordonnees(int16_t, int16_t)	16	static
+Coordonnees.cpp:38:1:Coordonnees::Coordonnees(int16_t)	16	static
+Coordonnees.cpp:59:1:Coordonnees::Coordonnees(int16_t, int16_t, int16_t)	24	static
+Coordonnees.cpp:89:6:bool operator==(const Coordonnees&, const Coordonnees&)	16	static
+Coordonnees.cpp:97:6:bool operator!=(const Coordonnees&, const Coordonnees&)	16	static
+Coordonnees.cpp:105:14:Coordonnees& Coordonnees::operator+=(const Coordonnees&)	16	static
+Coordonnees.cpp:139:14:Coordonnees& Coordonnees::operator-=(const Coordonnees&)	16	static
+Coordonnees.cpp:173:13:Coordonnees operator+(const Coordonnees&, const Coordonnees&)	32	static
+Coordonnees.cpp:183:13:Coordonnees operator-(const Coordonnees&, const Coordonnees&)	32	static
+Coordonnees.cpp:193:14:Coordonnees& Coordonnees::operator=(const Coordonnees&)	16	static
+Coordonnees.cpp:217:9:int16_t Coordonnees::getX()	16	static
+Coordonnees.cpp:222:6:void Coordonnees::setX(int16_t)	16	static
+Coordonnees.cpp:236:9:int16_t Coordonnees::getY()	16	static
+Coordonnees.cpp:241:6:void Coordonnees::setY(int16_t)	16	static
+Coordonnees.cpp:255:9:int16_t Coordonnees::getAngle()	16	static
+Coordonnees.cpp:260:6:void Coordonnees::setAngle(int16_t)	16	static
+Coordonnees.cpp:294:9:uint8_t Coordonnees::depasse()	16	static
+Deplacement.cpp:15:1:Deplacement::Deplacement()	16	static
+Deplacement.cpp:33:1:Deplacement::Deplacement(uint16_t, uint16_t, uint16_t, uint16_t)	24	static
+Deplacement.cpp:51:1:Deplacement::Deplacement(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t, uint8_t)	24	static
+Deplacement.cpp:78:6:void Deplacement::setMode(uint8_t)	16	static
+Deplacement.cpp:129:9:uint8_t Deplacement::getMode()	16	static
+Deplacement.cpp:137:6:void Deplacement::setPinLE(uint16_t, uint16_t)	16	static
+Deplacement.cpp:143:11:uint16_t* Deplacement::getPinLE()	16	static
+Deplacement.cpp:157:6:void Deplacement::setPinRE(uint16_t, uint16_t)	16	static
+Deplacement.cpp:163:11:uint16_t* Deplacement::getPinRE()	16	static
+Deplacement.cpp:177:6:void Deplacement::setSpeed(uint16_t)	16	static
+Deplacement.cpp:182:10:uint16_t Deplacement::getSpeed()	16	static
+Deplacement.cpp:190:6:void Deplacement::setCote(uint16_t)	16	static
+Deplacement.cpp:196:10:uint16_t Deplacement::getCote()	16	static
+Deplacement.cpp:204:6:void Deplacement::setCoordonneesActuelles(Coordonnees)	16	static
+Deplacement.cpp:209:13:Coordonnees Deplacement::getCoordonneesActuelles()	16	static
+Deplacement.cpp:217:6:void Deplacement::setAccel(uint16_t)	16	static
+Deplacement.cpp:222:10:uint16_t Deplacement::getAccel()	16	static
+Deplacement.cpp:230:6:void Deplacement::setRayonRoue(uint16_t)	16	static
+Deplacement.cpp:235:10:uint16_t Deplacement::getRayonRoue()	16	static
+Deplacement.cpp:243:6:void Deplacement::setPinM0(uint16_t)	16	static
+Deplacement.cpp:248:10:uint16_t Deplacement::getPinM0()	16	static
+Deplacement.cpp:253:6:void Deplacement::setPinM1(uint16_t)	16	static
+Deplacement.cpp:258:10:uint16_t Deplacement::getPinM1()	16	static
+Deplacement.cpp:263:6:void Deplacement::setPinM2(uint16_t)	16	static
+Deplacement.cpp:268:10:uint16_t Deplacement::getPinM2()	16	static
+Deplacement.cpp:292:6:void Deplacement::goStraight(int8_t, uint16_t)	16	static
+Deplacement.cpp:307:6:void Deplacement::turn(uint16_t, uint16_t, uint16_t)	24	static
+Deplacement.cpp:331:6:void Deplacement::goTo(const Coordonnees*)	16	static
+Deplacement.cpp:355:6:void Deplacement::curveAccel(uint16_t)	40	static
+Deplacement.cpp:381:6:void Deplacement::onePulse(uint16_t)	16	static
+main.cpp:69:5:int main()	96	static
+main.cpp:121:6:void SystemClock_Config()	72	static
+main.cpp:159:6:void Error_Handler()	4	static
+cmath:475:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::sqrt(_Tp) [with _Tp = int]	24	static
