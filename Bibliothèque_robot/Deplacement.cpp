@@ -1,5 +1,7 @@
 #include "Deplacement.hpp"
 
+//using namespace robotDepl;
+
 /* ================================================================================== *\
    ======================                                      ======================
    ======================             CONSTRUCTEURS            ======================
@@ -17,6 +19,12 @@ Deplacement::Deplacement()
 	_pinDirRE		=	5;
 	_pinStepLE		=	6;
 	_pinStepRE		=	7;
+	_pinMode0 = 8;
+	_pinMode1 = 9;
+	_pinMode2 = 10;
+	_m0 = 0;
+	_m1 = 0;
+	_m2 = 0;		
 }
 
 //***************************************************
@@ -29,12 +37,18 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 	_pinDirRE		=	pinDirRE;
 	_pinStepLE		=	pinStepLE;
 	_pinStepRE		=	pinStepRE;
+	_pinMode0 = 8;
+	_pinMode1 = 9;
+	_pinMode2 = 10;
+	_m0 = 0;
+	_m1 = 0;
+	_m2 = 0;		
 }
 
 //***************************************************
 // Constructeur Complet
 //***************************************************
-Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, const uint16_t pinDirRE, const uint16_t pinStepRE, const uint16_t speed, const Mode mode)
+Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, const uint16_t pinDirRE, const uint16_t pinStepRE, const uint16_t speed, const uint8_t mode)
 {
 	_speed 			=	speed;
 	_mode			=	mode;
@@ -42,6 +56,12 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 	_pinDirRE		=	pinDirRE;
 	_pinStepLE		=	pinStepLE;
 	_pinStepRE		=	pinStepRE;
+	_pinMode0 = 8;
+	_pinMode1 = 9;
+	_pinMode2 = 10;
+	_m0 = 0;
+	_m1 = 0;
+	_m2 = 0;		
 }
 //}
 
@@ -103,9 +123,7 @@ void Deplacement::setMode(const uint8_t mode)
 			_m2 = GPIO_PIN_RESET;
 	}
 	
-	HAL_GPIO_WritePin(GPIOA, _pinMode0, _m0);		//GPIOA en attendant
-	HAL_GPIO_WritePin(GPIOA, _pinMode1, _m1);
-	HAL_GPIO_WritePin(GPIOA, _pinMode2, _m2);
+	
 }
 
 uint8_t Deplacement::getMode()
@@ -163,7 +181,7 @@ void Deplacement::setSpeed(const uint16_t speed)
 
 uint16_t Deplacement::getSpeed()
 {
-	return speed;
+	return _speed;
 }
 
 //***************************************************
@@ -222,32 +240,32 @@ uint16_t Deplacement::getRayonRoue()
 //***************************************************
 // Get - Set pin Mode
 //***************************************************
-void setPinM0(const uint16_t pin)
+void Deplacement::setPinM0(const uint16_t pin)
 {
 	_pinMode0 = pin;
 }
 
-uint16_t getPinM0()
+uint16_t Deplacement::getPinM0()
 {
 	return _pinMode0;
 }
 
-void setPinM1(const uint16_t pin)
+void Deplacement::setPinM1(const uint16_t pin)
 {
 	_pinMode1 = pin;
 }
 
-uint16_t getPinM1()
+uint16_t Deplacement::getPinM1()
 {
 	return _pinMode1;
 }
 
-void setPinM2(const uint16_t pin)
+void Deplacement::setPinM2(const uint16_t pin)
 {
 	_pinMode2 = pin;
 }
 
-uint16_t getPinM2()
+uint16_t Deplacement::getPinM2()
 {
 	return _pinMode2;
 }
@@ -301,7 +319,7 @@ void Deplacement::turn(const uint16_t lateralite, const uint16_t angle, const ui
 //{
 //***************************************************
 //
-// Fonction : 		goToStraight
+// Fonction : 		goTo
 //
 // Description : 	envoie le robot aux coordonnées 
 //					en ligne droite
@@ -310,7 +328,7 @@ void Deplacement::turn(const uint16_t lateralite, const uint16_t angle, const ui
 // out :			void
 //
 //***************************************************
-void Deplacement::goToStraight(const Coordonnees *coord)
+void Deplacement::goTo(const Coordonnees *coord)
 {
 	
 }
@@ -336,7 +354,7 @@ void Deplacement::goToStraight(const Coordonnees *coord)
 //***************************************************
 void Deplacement::curveAccel(const uint16_t distance)
 {
-	if(speed * speed > _accel * distance)	//cas où le robot n'a pas le temps d'atteindre la vitesse max
+	if(_speed * _speed > _accel * distance)	//cas où le robot n'a pas le temps d'atteindre la vitesse max
 	{
 		float tm = sqrt(distance / _accel); //Temps milieu
 		
@@ -344,8 +362,8 @@ void Deplacement::curveAccel(const uint16_t distance)
 	
 	else
 	{
-		float tm = speed/_accel;	//temps montée et descente
-		float tc = ditance / speed - speed / _accel; //temps vitesse constante
+		float tm = _speed/_accel;	//temps montée et descente
+		float tc = distance / _speed - _speed / _accel; //temps vitesse constante
 		
 	}
 }

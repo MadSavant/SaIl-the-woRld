@@ -1,5 +1,6 @@
-#include "Coordonnes.hpp"
+#include "Coordonnees.hpp"
 
+// using namespace robotCoord;
 
 /* ================================================================================== *\
    ======================                                      ======================
@@ -77,19 +78,6 @@ Coordonnees::Coordonnees(int16_t x, int16_t y, int16_t angle)
 
 /* ================================================================================== *\
    ======================                                      ======================
-   ======================          FONCTIONS INTERNES          ======================
-   ======================                                      ======================
-\* ================================================================================== */
-
-//{
-bool Coordonnees::isEqual(Coordonnees const& b) const
-{
-	return (_x == b._x && _y == b._y && _angle == b._angle);
-}
-//}
-
-/* ================================================================================== *\
-   ======================                                      ======================
    ======================              OPERATEURS              ======================
    ======================                                      ======================
 \* ================================================================================== */
@@ -98,15 +86,15 @@ bool Coordonnees::isEqual(Coordonnees const& b) const
 //***************************************************
 // Opérateur ==
 //***************************************************
-bool Coordonnees::operator==(Coordonnees const& a, Coordonnees const& b)
+bool operator==(Coordonnees const& a, Coordonnees const& b)
 {
-	return a.isEqual(b);
+	return (a._x == b._x && a._y == b._y && a._angle == b._angle);
 }
 
 //***************************************************
 // Opérateur !=
 //***************************************************
-bool Coordonnees::operator!=(Coordonnees const& a, Coordonnees const& b)
+bool operator!=(Coordonnees const& a, Coordonnees const& b)
 {
     return !(a==b); 
 }
@@ -182,7 +170,7 @@ Coordonnees& Coordonnees::operator-=(Coordonnees const& b)
 //***************************************************
 // Opérateur +
 //***************************************************
-Coordonnees Coordonnees::operator+(Coordonnees const& a, Coordonnees const& b)
+Coordonnees operator+(Coordonnees const& a, Coordonnees const& b)
 {
 	Coordonnees result(a);
 	result += b;
@@ -192,7 +180,7 @@ Coordonnees Coordonnees::operator+(Coordonnees const& a, Coordonnees const& b)
 //***************************************************
 // Opérateur -
 //***************************************************
-Coordonnees Coordonnees::operator-(Coordonnees const& a, Coordonnees const& b)
+Coordonnees operator-(Coordonnees const& a, Coordonnees const& b)
 {
 	Coordonnees result(a);
 	result -= b;
@@ -303,7 +291,7 @@ void Coordonnees::setAngle(int16_t angle)
 // out :			uint8_t	DEPASSEMENT_STATE
 //
 //***************************************************
-uint8_t Coordonnees::depasse(void);
+uint8_t Coordonnees::depasse(void)
 {
 	if(_depassementX && _depassementY) 	return DEPASSEMENT_XY;
 	else if(_depassementX)				return DEPASSEMENT_X;
