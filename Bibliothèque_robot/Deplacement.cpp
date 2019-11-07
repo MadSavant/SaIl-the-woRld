@@ -18,13 +18,7 @@ Deplacement::Deplacement()
 	_pinDirLE		=	4;
 	_pinDirRE		=	5;
 	_pinStepLE		=	6;
-	_pinStepRE		=	7;
-	_pinMode0 = 8;
-	_pinMode1 = 9;
-	_pinMode2 = 10;
-	_m0 = 0;
-	_m1 = 0;
-	_m2 = 0;		
+	_pinStepRE		=	7;		
 }
 
 //***************************************************
@@ -36,13 +30,7 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 	_pinDirLE		=	pinDirLE;
 	_pinDirRE		=	pinDirRE;
 	_pinStepLE		=	pinStepLE;
-	_pinStepRE		=	pinStepRE;
-	_pinMode0 = 8;
-	_pinMode1 = 9;
-	_pinMode2 = 10;
-	_m0 = 0;
-	_m1 = 0;
-	_m2 = 0;		
+	_pinStepRE		=	pinStepRE;	
 }
 
 //***************************************************
@@ -55,13 +43,7 @@ Deplacement::Deplacement(const uint16_t pinDirLE, const uint16_t pinStepLE, cons
 	_pinDirLE		=	pinDirLE;
 	_pinDirRE		=	pinDirRE;
 	_pinStepLE		=	pinStepLE;
-	_pinStepRE		=	pinStepRE;
-	_pinMode0 = 8;
-	_pinMode1 = 9;
-	_pinMode2 = 10;
-	_m0 = 0;
-	_m1 = 0;
-	_m2 = 0;		
+	_pinStepRE		=	pinStepRE;		
 }
 //}
 
@@ -357,14 +339,14 @@ void Deplacement::curveAccel(const uint16_t distance)
 	if(_speed * _speed > _accel * distance)	//cas où le robot n'a pas le temps d'atteindre la vitesse max
 	{
 		float tm = sqrt(distance / _accel); //Temps milieu
-		
+		if(tm){}//avoid warning
 	}
 	
 	else
 	{
 		float tm = _speed/_accel;	//temps montée et descente
 		float tc = distance / _speed - _speed / _accel; //temps vitesse constante
-		
+		if(tm && tc){}//avoid warning
 	}
 }
 

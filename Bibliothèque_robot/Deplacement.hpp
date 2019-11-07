@@ -40,15 +40,16 @@ Autheur 	: Gaëtan ROBERT
 			uint16_t 		_pinDirRE;
 			uint16_t 		_pinStepLE;
 			uint16_t 		_pinStepRE;
-			uint16_t 		_pinMode0;
-			uint16_t 		_pinMode1;
-			uint16_t 		_pinMode2;
-			uint16_t		_m0;
-			uint16_t		_m1;
-			uint16_t		_m2;		
+			uint16_t 		_pinMode0 = 0;
+			uint16_t 		_pinMode1 = 0;
+			uint16_t 		_pinMode2 = 0;
+			uint16_t		_m0 = 0 ;
+			uint16_t		_m1 = 0 ;
+			uint16_t		_m2 = 0 ;		
 			uint16_t 		_cote = COTE_GAUCHE;
 			uint16_t		_accel = 1000;//mm/s-2
 			uint16_t		_rayonRoue = 50;
+			GPIO_TypeDef*	GPIOx;
 			
 			
 		public :

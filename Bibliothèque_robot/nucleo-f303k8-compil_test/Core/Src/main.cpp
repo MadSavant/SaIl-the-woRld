@@ -88,7 +88,7 @@ int main(void)
   c = a;
   test = a ==b;
   test = a !=b;
-
+  if(test){} //avoid warning
   /* USER CODE END Init */
 
   /* Configure the system clock */
